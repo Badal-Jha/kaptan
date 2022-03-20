@@ -7,7 +7,7 @@ const connectDatabase = () => {
       useUnifiedTopology: true,
       useCreateIndex: true,
     })
-    .then((result) => console.log("database connected🎉🎉"))
+    .then((result) => console.log("database connected🎉"))
     .catch((err) => console.log(err));
 };
 module.exports = connectDatabase;
