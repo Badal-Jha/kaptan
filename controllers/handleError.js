@@ -4,16 +4,16 @@ module.exports.handleError = (err) => {
 
   //email error
   if (err.message === "incorrect email") {
-    errors.email = "this email is not registered";
+    errors.email = "This email is not registered";
   }
 
   //password
   if (err.message === "incorrect password") {
-    errors.password = "password incorrect";
+    errors.password = "Password Incorrect";
   }
   //duplicate error code
   if (err.code == 11000) {
-    errors.email = "this email is already registered";
+    errors.email = "This email is already registered";
   }
   //validaton errors
   if (err.message.includes("user validation failed")) {
