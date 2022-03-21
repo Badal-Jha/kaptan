@@ -63,7 +63,7 @@ form h2 {
   margin-bottom: 40px;
 }
 form {
-  width: 760px;
+  width: 600px;
   margin: 0 auto;
   padding: 30px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
@@ -137,10 +137,8 @@ footer {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.signup-images > img {
-  height: 90px;
-  width: 170px;
-  border: 2px solid yellow;
-  border-radius: 2px;
-  object-fit: cover;
+.signup-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }

@@ -9,12 +9,12 @@
     <% var arr=[]; for(let i=1;i<=50;i++)arr.push(i); function
     shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j =
     Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j],
-    array[i]]; } } shuffleArray(arr); for(let i=0;i<=24;i++){ %>
-    <br />
+    array[i]]; } } shuffleArray(arr); for(let i=0;i<=15;i++){ %>
+
     <li>
       <input type="checkbox" id="myCheckbox<%= arr[i]%>" name="passImg" />
       <label for="myCheckbox<%= arr[i]%>"
-        ><img src="/images/<%= arr[i]%>.png"
+        ><img class="signup-image" src="/images/<%= arr[i]%>.png"
       /></label>
     </li>
     <!-- prettier-ignore -->
