@@ -14,7 +14,7 @@
     <li>
       <input type="checkbox" id="myCheckbox<%= arr[i]%>" name="passImg" />
       <label for="myCheckbox<%= arr[i]%>"
-        ><img class="signup-image" src="/images/<%= arr[i]%>.png"
+        ><img onclick="changeimage(this)" class="signup-image" src="/images/<%= arr[i]%>.png"
       /></label>
     </li>
     <!-- prettier-ignore -->
@@ -87,6 +87,10 @@
   const form = document.querySelector("form");
   const emailError = document.querySelector(".email");
   const passError = document.querySelector(".password");
+
+  function changeimage(imgg) {
+      imgg.src="/images/" + Math.floor(Math.random() * (50 - 1 + 1) + 1) + ".png"
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
