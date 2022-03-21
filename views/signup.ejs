@@ -6,16 +6,18 @@
   <input type="text" name="email" required />
   <div class="error email"></div>
   <div class="signup-images">
-    <% for(let count = 1; count <= 9; count++ ){ %>
+    <% var arr=[]; for(let i=1;i<=50;i++)arr.push(i); function
+    shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j =
+    Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j],
+    array[i]]; } } shuffleArray(arr); for(let i=0;i<=24;i++){ %>
     <br />
     <li>
-      <input type="checkbox" id="myCheckbox<%= count%>" name="passImg" />
-      <label for="myCheckbox<%= count%>"
-        ><img src="/images/<%= count%>.png"
+      <input type="checkbox" id="myCheckbox<%= arr[i]%>" name="passImg" />
+      <label for="myCheckbox<%= arr[i]%>"
+        ><img src="/images/<%= arr[i]%>.png"
       /></label>
     </li>
     <!-- prettier-ignore -->
-    <!-- <img src="/images/<%= count%>.png" id="<%= count%>" -->
 
     <% } %>
   </div>
@@ -66,17 +68,17 @@
   }
 
   :checked + label {
-    border-color: #ddd;
+    border-color: green;
   }
 
   :checked + label:before {
-    content: "✓";
+    /* content: "✓"; */
     background-color: grey;
-    transform: scale(1);
+    /* transform: scale(1); */
   }
 
   :checked + label img {
-    transform: scale(0.9);
+    /* transform: scale(0.9); */
     /* box-shadow: 0 0 5px #333; */
     z-index: -1;
   }
@@ -96,8 +98,9 @@
     var passStr = "";
     selectedImages.forEach((img) => {
       passStr += img.id;
-      //  console.log(img.id);
     });
+    //
+
     console.log(passStr);
     //reset errors
     emailError.textContent = "";
