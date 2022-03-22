@@ -21,10 +21,11 @@ module.exports.login_get = (req, res) => {
 };
 module.exports.signup_post = async (req, res) => {
   const { email, password } = req.body;
-
+  const _password = Buffer.from(password, "base64").toString("ascii");
+  console.log(_password);
   try {
     //we can use either .save or .create
-    const newUser = new User({ email, password });
+    const newUser = new User({ email, password: _password });
     const user = await newUser.save();
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 }); //httpOnly:true so that we cannt change jwt frm frontend
@@ -36,10 +37,11 @@ module.exports.signup_post = async (req, res) => {
 };
 module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
-
+  const _password = Buffer.from(password, "base64").toString("ascii");
+  console.log(_password);
   try {
     //User.login() is a statics method tha we create in user model
-    const user = await User.login(email, password);
+    const user = await User.login(email, _password);
     //create and send jwt token
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
@@ -110,14 +112,15 @@ module.exports.reset_post = async (req, res) => {
   const { id, token } = req.params;
   const { password } = req.body;
   const user = await User.findById(id);
-  console.log(id, password);
+  const _password = Buffer.from(password, "base64").toString("ascii");
+
   if (user) {
     const secret = jwt_secret + user.password;
     try {
       const payload = jwt.verify(token, secret);
 
       const salt = await bcrypt.genSalt();
-      const hashedPassword = await bcrypt.hash(password, salt);
+      const hashedPassword = await bcrypt.hash(_password, salt);
       user.password = hashedPassword;
       const filter = { _id: id };
       const update = { password: hashedPassword };

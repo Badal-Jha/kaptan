@@ -30,7 +30,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 nav ul {
   display: flex;
@@ -55,12 +55,13 @@ a {
 }
 .btn {
   border-radius: 36px;
-  background: #fee996;
+  background: #1bbdbd;
+  color: white;
 }
 form h2 {
-  font-size: 2.4em;
+  font-size: 2em;
   font-weight: 900;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 form {
   width: 600px;
@@ -84,7 +85,7 @@ label {
 button {
   margin-top: 30px;
   border-radius: 36px;
-  background: #fee996;
+  background: #1bbdbd;
   border: 0;
   text-transform: uppercase;
   font-weight: 700;
@@ -93,6 +94,7 @@ button {
   padding: 10px 16px;
   letter-spacing: 2px;
   cursor: pointer;
+  color: white;
 }
 .error {
   color: #860b0b;

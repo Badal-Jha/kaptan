@@ -12,9 +12,17 @@
     array[i]]; } } shuffleArray(arr); for(let i=0;i<=15;i++){ %>
 
     <li>
-      <input type="checkbox" id="myCheckbox<%= arr[i]%>" name="passImg" />
+      <input
+        type="checkbox"
+        id="myCheckbox<%= arr[i]%>"
+        onClick="updatePass(this)"
+        name="passImg"
+      />
       <label for="myCheckbox<%= arr[i]%>"
-        ><img class="signup-image" src="/images/<%= arr[i]%>.png"
+        ><img
+          class="signup-image"
+          onclick="changeimage(this)"
+          src="/images/<%= arr[i]%>.png"
       /></label>
     </li>
     <!-- prettier-ignore -->
@@ -23,6 +31,12 @@
   </div>
   <div class="password error"></div>
   <button>Login</button>
+  <!-- prettier-ignore -->
+  <a
+    href="/forgot-password"
+    style="text-decoration: underline; font-size: 13px;"
+    >Forgot Password?</a
+  >
 </form>
 <style>
   li {
@@ -87,26 +101,22 @@
   const form = document.querySelector("form");
   const emailError = document.querySelector(".email");
   const passError = document.querySelector(".password");
-
+  var passwordInput = "";
+  function updatePass(checkbox) {
+    passwordInput += checkbox.id;
+    //  console.log(passwordInput);
+  }
+  function changeimage(imgg) {
+    imgg.src = "/images/" + Math.floor(Math.random() * 16 + 1) + ".png";
+  }
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const selectedImages = document.querySelectorAll(
-      'input[name="passImg"]:checked'
-    );
 
-    var passStr = "";
-    selectedImages.forEach((img) => {
-      passStr += img.id;
-      //  console.log(img.id);
-    });
-    let newPass = passStr.split("").sort().join("");
-    console.log("login", newPass);
-    //reset errors
     emailError.textContent = "";
     passError.textContent = "";
     //get values
     const email = form.email.value;
-    const password = newPass;
+    const password = btoa(passwordInput);
     try {
       const res = await fetch("/login", {
         method: "POST",
