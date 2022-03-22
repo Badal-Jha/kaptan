@@ -36,7 +36,7 @@
       padding: 10px;
       display: block;
       position: relative;
-      margin: 10px;
+      margin: 3px;
       cursor: pointer;
     }
 
@@ -46,7 +46,7 @@
       content: " ";
       display: block;
       border-radius: 50%;
-      border: 1px solid grey;
+      border: 1px solid rgb(191, 192, 191);
       position: absolute;
       top: -5px;
       left: -5px;
@@ -59,24 +59,24 @@
     }
 
     label img {
-      height: 100px;
-      width: 100px;
+      height: 75px;
+      width: 75px;
       transition-duration: 0.2s;
       transform-origin: 50% 50%;
     }
 
     :checked+label {
-      border-color: green;
+      border-color: rgb(114, 175, 108);
     }
 
     :checked+label:before {
-      /* content: "✓"; */
-      background-color: grey;
-      /* transform: scale(1); */
+      content: "";
+      background-color: rgb(255, 255, 255);
+      /* transform: scale(0.8); */
     }
 
     :checked+label img {
-      /* transform: scale(0.9); */
+      /* transform: scale(0.8); */
       /* box-shadow: 0 0 5px #333; */
       z-index: -1;
     }
