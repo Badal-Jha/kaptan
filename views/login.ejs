@@ -1,129 +1,133 @@
 <%- include('partials/header'); -%>
 
-<form>
-  <h2>Login</h2>
-  <label for="email">Email</label>
-  <input type="text" name="email" required />
-  <div class="error email"></div>
-  <div class="signup-images">
-    <% for(let count = 1; count <= 9; count++ ){ %>
-    <br />
-    <li>
-      <input type="checkbox" id="myCheckbox<%= count%>" name="passImg" />
-      <label for="myCheckbox<%= count%>"
-        ><img src="/images/<%= count%>.png"
-      /></label>
-    </li>
-    <!-- prettier-ignore -->
-    <!-- <img src="/images/<%= count%>.png" id="<%= count%>" -->
+  <form>
+    <h2>Login</h2>
+    <label for="email">Email</label>
+    <input type="text" name="email" required />
+    <div class="error email"></div>
+    <div class="signup-images">
+      <% for(let count=1; count <=16; count++ ){ %>
+        <br />
+        <li>
+          <input type="checkbox" onClick="updatePass(this)" id="myCheckbox<%= count%>" name="passImg" />
+          <label for="myCheckbox<%= count%>"><img onclick="changeimage(this)" src="/images/<%= count%>.png" /></label>
+        </li>
+        <!-- prettier-ignore -->
+        <!-- <img src="/images/<%= count%>.png" id="<%= count%>" -->
 
-    <% } %>
-  </div>
-  <div class="password error"></div>
-  <button>Login</button>
-</form>
-<style>
-  li {
-    display: inline-block;
-  }
-
-  input[type="checkbox"][id^="myCheckbox"] {
-    display: none;
-  }
-
-  label {
-    border: 1px solid #fff;
-    padding: 10px;
-    display: block;
-    position: relative;
-    margin: 10px;
-    cursor: pointer;
-  }
-
-  label:before {
-    background-color: white;
-    color: white;
-    content: " ";
-    display: block;
-    border-radius: 50%;
-    border: 1px solid rgb(191, 192, 191);
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    line-height: 28px;
-    transition-duration: 0.4s;
-    transform: scale(0);
-  }
-
-  label img {
-    height: 100px;
-    width: 100px;
-    transition-duration: 0.2s;
-    transform-origin: 50% 50%;
-  }
-
-  :checked + label {
-    border-color: rgb(114, 175, 108);
-  }
-
-  :checked + label:before {
-    content: "";
-    background-color: rgb(255, 255, 255);
-    /* transform: scale(0.8); */
-  }
-
-  :checked + label img {
-    /* transform: scale(0.8); */
-    /* box-shadow: 0 0 5px #333; */
-    z-index: -1;
-  }
-</style>
-<script>
-  const form = document.querySelector("form");
-  const emailError = document.querySelector(".email");
-  const passError = document.querySelector(".password");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const selectedImages = document.querySelectorAll(
-      'input[name="passImg"]:checked'
-    );
-
-    var passStr = "";
-    selectedImages.forEach((img) => {
-      passStr += img.id;
-      //  console.log(img.id);
-    });
-    console.log(passStr);
-    //reset errors
-    emailError.textContent = "";
-    passError.textContent = "";
-    //get values
-    const email = form.email.value;
-    const password = passStr;
-    try {
-      const res = await fetch("/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: { "content-Type": "application/json" },
-      });
-      const data = await res.json();
-
-      if (data.errors) {
-        emailError.textContent = data.errors.email;
-        passError.textContent = data.errors.password;
-      }
-      if (data.user) {
-        location.assign("/");
-      }
-      console.log(data);
-    } catch (err) {
-      console.log(err);
+        <% } %>
+    </div>
+    <div class="password error"></div>
+    <button>Login</button>
+  </form>
+  <style>
+    li {
+      display: inline-block;
     }
-  });
-</script>
 
-<%- include('partials/footer'); -%>
+    input[type="checkbox"][id^="myCheckbox"] {
+      display: none;
+    }
+
+    label {
+      border: 1px solid #fff;
+      padding: 10px;
+      display: block;
+      position: relative;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    label:before {
+      background-color: white;
+      color: white;
+      content: " ";
+      display: block;
+      border-radius: 50%;
+      border: 1px solid rgb(191, 192, 191);
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      line-height: 28px;
+      transition-duration: 0.4s;
+      transform: scale(0);
+    }
+
+    label img {
+      height: 100px;
+      width: 100px;
+      transition-duration: 0.2s;
+      transform-origin: 50% 50%;
+    }
+
+    :checked+label {
+      border-color: rgb(114, 175, 108);
+    }
+
+    :checked+label:before {
+      content: "";
+      background-color: rgb(255, 255, 255);
+      /* transform: scale(0.8); */
+    }
+
+    :checked+label img {
+      /* transform: scale(0.8); */
+      /* box-shadow: 0 0 5px #333; */
+      z-index: -1;
+    }
+  </style>
+  <script>
+    const form = document.querySelector("form");
+    const emailError = document.querySelector(".email");
+    const passError = document.querySelector(".password");
+    var passwordInput = "";
+    function updatePass(checkbox) {
+      passwordInput += checkbox.id;
+      //  console.log(passwordInput);
+    }
+    function changeimage(imgg) {
+      imgg.src = "/images/" + Math.floor(Math.random() * (16) + 1) + ".png";
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      // const selectedImages = document.querySelectorAll(
+      //   'input[name="passImg"]:checked'
+      // );
+
+      var passStr = passwordInput;
+
+      // console.log(passStr);
+      //reset errors
+      emailError.textContent = "";
+      passError.textContent = "";
+      //get values
+      const email = form.email.value;
+      const password = btoa(passStr);
+      //  console.log(password);
+      try {
+        const res = await fetch("/login", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: { "content-Type": "application/json" },
+        });
+        const data = await res.json();
+
+        if (data.errors) {
+          emailError.textContent = data.errors.email;
+          passError.textContent = data.errors.password;
+        }
+        if (data.user) {
+          location.assign("/");
+        }
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  </script>
+
+  <%- include('partials/footer'); -%>
