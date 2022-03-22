@@ -92,6 +92,7 @@ button {
   display: block;
   padding: 10px 16px;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 .error {
   color: #860b0b;

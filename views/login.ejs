@@ -6,7 +6,7 @@
   <input type="text" name="email" required />
   <div class="error email"></div>
   <div class="signup-images">
-    <% var arr=[]; for(let i=1;i<=50;i++)arr.push(i); function
+    <% var arr=[]; for(let i=1;i<=16;i++)arr.push(i); function
     shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j =
     Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j],
     array[i]]; } } shuffleArray(arr); for(let i=0;i<=15;i++){ %>
@@ -99,13 +99,14 @@
       passStr += img.id;
       //  console.log(img.id);
     });
-    console.log(passStr);
+    let newPass = passStr.split("").sort().join("");
+    console.log("login", newPass);
     //reset errors
     emailError.textContent = "";
     passError.textContent = "";
     //get values
     const email = form.email.value;
-    const password = passStr;
+    const password = newPass;
     try {
       const res = await fetch("/login", {
         method: "POST",

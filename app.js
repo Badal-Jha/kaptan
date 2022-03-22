@@ -19,15 +19,6 @@ app.set("view engine", "ejs");
 
 // database connection
 connectDatabase();
-// const dbURI = "mongodb+srv://BadalJha:8860@cluster0.qy5zb.mongodb.net/JWT-auth";
-// mongoose
-//   .connect(dbURI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//   })
-//   .then((result) => app.listen(3000))
-//   .catch((err) => console.log(err));
 
 app.get("*", isValidUser); //this will apply checkUser on all get req
 app.get("/", (req, res) => res.render("home"));
